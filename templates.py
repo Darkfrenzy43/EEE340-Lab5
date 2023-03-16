@@ -45,13 +45,6 @@ lw     $s1 4($sp)
 addiu  $sp $sp 4
 """
 
-if_ = """\
-{condition}
-beqz   $t0 {endif_label}
-{true_block}
-{endif_label}:
-"""
-
 while_ = """\
 {startwhile_label}:
 {condition}
@@ -59,6 +52,16 @@ beqz $t0 {endwhile_label}
 {true_block}
 b {startwhile_label}
 {endwhile_label}:
+"""
+
+if_else_ = """\
+{condition}
+beqz   $t0 {endif_label}
+{true_block}
+b {endelse_label}
+{endif_label}:
+{false_block}
+{endelse_label}:
 """
 
 print_int_or_string = """\
