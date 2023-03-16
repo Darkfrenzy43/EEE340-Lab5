@@ -89,8 +89,10 @@ class MIPSGenerator(NimbleListener):
         self.mips[ctx] = self.mips[ctx.block()]
 
     def exitAddSub(self, ctx: NimbleParser.AddSubContext):
+
         # TODO: extend for String concatenation
-        self.mips[ctx] = templates.add_sub.format(
+
+        self.mips[ctx] = templates.add_sub_mul_div.format(
             operation='add' if ctx.op.text == '+' else 'sub',
             expr0=self.mips[ctx.expr(0)],
             expr1=self.mips[ctx.expr(1)]
@@ -133,4 +135,11 @@ class MIPSGenerator(NimbleListener):
         pass
 
     def exitMulDiv(self, ctx: NimbleParser.MulDivContext):
+
+        self.mips[ctx] = templates.add_sub_mul_div.format(
+            operation = 'mul' if ctx.op.text == '*' else 'div',
+            expr0 = self.mips[ctx.expr(0)],
+            expr1 = self.mips[ctx.expr(1)]
+        )
+
         pass

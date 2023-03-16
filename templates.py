@@ -35,7 +35,7 @@ li $v0 10
 syscall
 """
 
-add_sub = """\
+add_sub_mul_div = """\
 {expr0}
 sw     $t0 0($sp) 
 addiu  $sp $sp -4 
