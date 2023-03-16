@@ -4,7 +4,7 @@ true_string: .asciiz "true"
 false_string: .asciiz "false"
     
 string_0: .asciiz "Negative of 10 is "
-string_1: .asciiz "Testing parens, subtraction and integer negation...\n"
+string_1: .asciiz "\n\nTesting parens, subtraction and integer negation...\n"
 string_2: .asciiz "10 + (-3) = "
 
 .text
