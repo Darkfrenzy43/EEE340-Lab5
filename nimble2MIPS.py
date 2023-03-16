@@ -105,11 +105,13 @@ class MIPSGenerator(NimbleListener):
         if ctx.block(1) is not None:
             false_block = self.mips[ctx.block(1)];
 
-        self.mips[ctx] = templates.if_.format(
+
+        self.mips[ctx] = templates.if_else_.format(
             condition=self.mips[ctx.expr()],
             true_block=self.mips[ctx.block(0)],
             endif_label=self.unique_label('endif'),
-            false_block = false_block
+            false_block = false_block,
+            endelse_label=self.unique_label('endelse') # Yea adding this is fine even when no else statement.
         )
 
 

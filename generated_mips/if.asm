@@ -3,8 +3,8 @@
 true_string: .asciiz "true"
 false_string: .asciiz "false"
     
-string_1: .asciiz "\n"
-string_3: .asciiz "done"
+string_2: .asciiz "\n"
+string_5: .asciiz "done"
 
 .text
 
@@ -26,23 +26,29 @@ move   $a0 $t0
 li     $v0 1
 syscall
 
+b endelse_1
 endif_0:
 
-la     $t0 string_1
+endelse_1:
+
+la     $t0 string_2
 move   $a0 $t0
 li     $v0 4
 syscall
 
 li     $t0 0
-beqz   $t0 endif_2
+beqz   $t0 endif_3
 li     $t0 99
 move   $a0 $t0
 li     $v0 1
 syscall
 
-endif_2:
+b endelse_4
+endif_3:
 
-la     $t0 string_3
+endelse_4:
+
+la     $t0 string_5
 move   $a0 $t0
 li     $v0 4
 syscall
