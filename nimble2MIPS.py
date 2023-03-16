@@ -123,7 +123,10 @@ class MIPSGenerator(NimbleListener):
         pass
 
     def exitNeg(self, ctx: NimbleParser.NegContext):
-        pass
+
+        # Unary minus code
+        if ctx.op.text == '-':
+            self.mips[ctx] = templates.unary_minus.format(expr = self.mips[ctx.expr()]);
 
     def exitParens(self, ctx: NimbleParser.ParensContext):
         pass
@@ -142,4 +145,4 @@ class MIPSGenerator(NimbleListener):
             expr1 = self.mips[ctx.expr(1)]
         )
 
-        pass
+

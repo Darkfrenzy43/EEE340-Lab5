@@ -1,0 +1,6 @@
+print "Negative of 10 is "
+print -10
+
+print "\n\nTesting parens, subtraction and integer negation...\n"
+print "10 + (-3) = "
+print 10 + -3

@@ -74,3 +74,9 @@ jal    true_false_string
 li     $v0 4
 syscall
 """
+
+
+unary_minus = """\
+{expr}
+neg    $t0, $t0 
+"""
