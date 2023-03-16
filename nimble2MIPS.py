@@ -120,7 +120,12 @@ class MIPSGenerator(NimbleListener):
         pass
 
     def exitWhile(self, ctx: NimbleParser.WhileContext):
-        pass
+        self.mips[ctx] = templates.while_.format(
+            condition=self.mips[ctx.expr()],
+            true_block=self.mips[ctx.block()],
+            startwhile_label=self.unique_label("startwhile"),
+            endwhile_label=self.unique_label("endwhile")
+        )
 
     def exitNeg(self, ctx: NimbleParser.NegContext):
         pass
