@@ -126,7 +126,7 @@ class MIPSGenerator(NimbleListener):
         pass
 
     def exitParens(self, ctx: NimbleParser.ParensContext):
-        pass
+        self.mips[ctx] = self.mips[ctx.expr()]
 
     def exitCompare(self, ctx: NimbleParser.CompareContext):
         pass

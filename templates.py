@@ -59,6 +59,7 @@ li     $v0 {service_code}
 syscall
 """
 
+
 # for printing booleans, we want to print true/false rather than 1/0
 # so we start by loading the corresponding string address in to $a0
 # using the true_false_string subroutine
