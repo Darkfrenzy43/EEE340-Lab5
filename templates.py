@@ -52,6 +52,15 @@ beqz   $t0 {endif_label}
 {endif_label}:
 """
 
+while_ = """\
+{startwhile_label}:
+{condition}
+beqz $t0 {endwhile_label}
+{true_block}
+b {startwhile_label}
+{endwhile_label}:
+"""
+
 print_int_or_string = """\
 {expr}
 move   $a0 $t0
