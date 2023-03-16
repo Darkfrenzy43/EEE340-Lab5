@@ -53,12 +53,12 @@ beqz   $t0 {endif_label}
 """
 
 while_ = """\
+{startwhile_label}:
 {condition}
-{startwhile_label}
 beqz $t0 {endwhile_label}
 {true_block}
 b {startwhile_label}
-{endwhile_label}
+{endwhile_label}:
 """
 
 print_int_or_string = """\
