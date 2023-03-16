@@ -59,9 +59,6 @@ li     $v0 {service_code}
 syscall
 """
 
-parens = """\
-
-"""
 
 # for printing booleans, we want to print true/false rather than 1/0
 # so we start by loading the corresponding string address in to $a0
