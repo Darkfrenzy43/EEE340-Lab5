@@ -76,8 +76,13 @@ li     $v0 4
 syscall
 """
 
-
 unary_minus = """\
 {expr}
 neg    $t0, $t0 
+"""
+
+bool_neg = """\
+{expr}
+li     $s1 1
+xor    $t0, $s1, $t0
 """

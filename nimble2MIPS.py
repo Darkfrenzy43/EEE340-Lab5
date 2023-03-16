@@ -128,6 +128,10 @@ class MIPSGenerator(NimbleListener):
         if ctx.op.text == '-':
             self.mips[ctx] = templates.unary_minus.format(expr = self.mips[ctx.expr()]);
 
+        # Boolean negation code
+        elif ctx.op.text == '!':
+            self.mips[ctx] = templates.bool_neg.format(expr = self.mips[ctx.expr()]);
+
     def exitParens(self, ctx: NimbleParser.ParensContext):
         self.mips[ctx] = self.mips[ctx.expr()]
 
