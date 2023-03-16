@@ -99,12 +99,19 @@ class MIPSGenerator(NimbleListener):
         )
 
     def exitIf(self, ctx: NimbleParser.IfContext):
-        # TODO: extend to support `else`
+
+        # Is there a more efficient way to do this?
+        false_block = "";
+        if ctx.block(1) is not None:
+            false_block = self.mips[ctx.block(1)];
+
         self.mips[ctx] = templates.if_.format(
             condition=self.mips[ctx.expr()],
             true_block=self.mips[ctx.block(0)],
-            endif_label=self.unique_label('endif')
+            endif_label=self.unique_label('endif'),
+            false_block = false_block
         )
+
 
     # ---------------------------------------------------------------------------------
     # Yours to implement - see lab instructions for suggested order

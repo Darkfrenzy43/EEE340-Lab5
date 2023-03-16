@@ -52,6 +52,14 @@ beqz   $t0 {endif_label}
 {endif_label}:
 """
 
+if_else_ = """\
+{if_condition}
+beqz   $t0 {endif_label}
+{true_block}
+{endif_label}:
+{false_block}
+"""
+
 print_int_or_string = """\
 {expr}
 move   $a0 $t0
