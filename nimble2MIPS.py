@@ -92,7 +92,7 @@ class MIPSGenerator(NimbleListener):
 
         # TODO: extend for String concatenation
 
-        self.mips[ctx] = templates.add_sub_mul_div.format(
+        self.mips[ctx] = templates.add_sub_mul_div_compare.format(
             operation='add' if ctx.op.text == '+' else 'sub',
             expr0=self.mips[ctx.expr(0)],
             expr1=self.mips[ctx.expr(1)]
@@ -129,14 +129,18 @@ class MIPSGenerator(NimbleListener):
         self.mips[ctx] = self.mips[ctx.expr()]
 
     def exitCompare(self, ctx: NimbleParser.CompareContext):
-        pass
+        self.mips[ctx] = templates.add_sub_mul_div_compare.format(
+            operation='seq' if ctx.op.text == '==' else ('sle' if ctx.op.text == '<=' else 'slt'),
+            expr0=self.mips[ctx.expr(0)],
+            expr1=self.mips[ctx.expr(1)]
+        )
 
     def exitVariable(self, ctx: NimbleParser.VariableContext):
         pass
 
     def exitMulDiv(self, ctx: NimbleParser.MulDivContext):
 
-        self.mips[ctx] = templates.add_sub_mul_div.format(
+        self.mips[ctx] = templates.add_sub_mul_div_compare.format(
             operation = 'mul' if ctx.op.text == '*' else 'div',
             expr0 = self.mips[ctx.expr(0)],
             expr1 = self.mips[ctx.expr(1)]
