@@ -27,6 +27,8 @@ jr     $ra
 
 main: 
 
+move $fp $sp
+
 {main}
 
 halt:
@@ -93,8 +95,16 @@ unary_minus = """\
 neg    $t0, $t0 
 """
 
+# Consider looking at ixor
 bool_neg = """\
 {expr}
 li     $s1 1
 xor    $t0, $s1, $t0
+"""
+
+# Include assignment code here after
+var_dec = """\
+addiu  $sp $sp -4
+{val_init}
+sw     $t0 {offset}($fp)
 """

@@ -21,6 +21,9 @@ jr     $ra
 
 main: 
 
+move $fp $sp
+
+
 li     $t0 9999999
 move   $a0 $t0
 li     $v0 1

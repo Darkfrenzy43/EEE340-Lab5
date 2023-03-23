@@ -7,6 +7,14 @@ or return statements.
 Authors: TODO: Your names here
 Date: TODO: Submission date here
 
+
+STRING CONCAT:
+    - need to generatere mips code to count number of bytes in string to null term
+    - need generated code to copies bytes from source locatin to new buffer we created
+    - we need to do this twice
+    - to be clever, we can make it two mips subroutine in text section.
+        Consider hand editing them to make life easier.
+
 Instructor version: 2023-03-15
 """
 
@@ -85,8 +93,8 @@ class MIPSGenerator(NimbleListener):
     # ---------------------------------------------------------------------------------
 
     def exitBody(self, ctx: NimbleParser.BodyContext):
-        # TODO: extend to include varBlock
-        self.mips[ctx] = self.mips[ctx.block()]
+
+        self.mips[ctx] = self.mips[ctx.varBlock()] + "\n" + self.mips[ctx.block()]
 
     def exitAddSub(self, ctx: NimbleParser.AddSubContext):
 
@@ -120,10 +128,38 @@ class MIPSGenerator(NimbleListener):
     # ---------------------------------------------------------------------------------
 
     def exitVarBlock(self, ctx: NimbleParser.VarBlockContext):
-        pass
+        self.mips[ctx] = '\n'.join(self.mips[s] for s in ctx.varDec())
 
     def exitVarDec(self, ctx: NimbleParser.VarDecContext):
-        pass
+
+        # Extract name and type
+        var_name = ctx.ID().getText();
+        var_type = PrimitiveType[ctx.TYPE().getText()];
+
+        # Get the variables symbol and its index
+        var_sym = self.current_scope.resolve(var_name);
+        var_ind = var_sym.index;
+
+        print("Var name is: {0}, type is {1}, index is {2}.".format(var_name, var_type, var_sym.index));
+
+        # Reserve a slot in stack for declared local var
+        slot_offset = -4 * (var_ind + 1);
+
+        # If no expr added, initialize vars to their default value depending on type
+        val_init_code = "";
+        # Handle if there was assignment too
+        if ctx.expr() is not None:
+            val_init_code = self.mips[ctx.expr()]
+        else:
+            if var_type != PrimitiveType.ERROR:
+                val_init_code = "li     $t0 0"
+
+        # Set the mips translation. Test if works...
+        self.mips[ctx] = templates.var_dec.format(
+            val_init = val_init_code,
+            offset = slot_offset
+        )
+
 
     def exitAssignment(self, ctx: NimbleParser.AssignmentContext):
         pass
@@ -157,7 +193,15 @@ class MIPSGenerator(NimbleListener):
         )
 
     def exitVariable(self, ctx: NimbleParser.VariableContext):
-        pass
+
+        # Extract info on variable
+        var_name = ctx.ID().getText()
+        var_sym = self.current_scope.resolve(var_name);
+        var_ind = var_sym.index;
+        var_offset = -4 * (var_ind + 1);
+
+        self.mips[ctx] = "lw   $t0  {}($fp)".format(var_offset);
+
 
     def exitMulDiv(self, ctx: NimbleParser.MulDivContext):
 

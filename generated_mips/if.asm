@@ -19,6 +19,9 @@ jr     $ra
 
 main: 
 
+move $fp $sp
+
+
 li     $t0 1
 beqz   $t0 endif_0
 li     $t0 1
