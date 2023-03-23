@@ -92,7 +92,7 @@ class Lexer(Recognizer, TokenSource):
 
 
     def reset(self):
-        # wack Lexer state variables
+        # wack Lexer state variables.nimble
         if self._input is not None:
             self._input.seek(0) # rewind the input
         self._token = None

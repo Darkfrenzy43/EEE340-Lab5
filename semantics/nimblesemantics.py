@@ -47,7 +47,7 @@ class InferTypesAndCheckConstraints(NimbleListener):
     The type of each expression parse tree node is calculated and stored in the `types`
     dictionary, using the tree node as the key.
 
-    The types of declared variables are stored in the current Scope object.
+    The types of declared variables.nimble are stored in the current Scope object.
 
     Any semantic errors detected, e.g., undefined variable names,
     type mismatches, etc, are logged in the `error_log`
