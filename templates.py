@@ -71,6 +71,11 @@ li     $v0 {service_code}
 syscall
 """
 
+assigment = """\
+{expr}
+sw     $t0 {offset}($fp) 
+"""
+
 
 # for printing booleans, we want to print true/false rather than 1/0
 # so we start by loading the corresponding string address in to $a0
