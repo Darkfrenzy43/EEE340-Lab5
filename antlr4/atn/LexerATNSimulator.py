@@ -10,9 +10,9 @@
 #  includes the current index into the input, the current line,
 #  and current character position in that line. Note that the Lexer is
 #  tracking the starting line and characterization of the token. These
-#  variables track the "state" of the simulator when it hits an accept state.
+#  variables.nimble track the "state" of the simulator when it hits an accept state.
 #
-#  <p>We track these variables separately for the DFA and ATN simulation
+#  <p>We track these variables.nimble separately for the DFA and ATN simulation
 #  because the DFA simulation often has to fail over to the ATN
 #  simulation. If the ATN simulation fails, we need the DFA to fall
 #  back to its previously accepted state, if any. If the ATN succeeds,
