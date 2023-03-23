@@ -73,10 +73,6 @@ li     $v0 {service_code}
 syscall
 """
 
-assigment = """\
-{expr}
-sw     $t0 {offset}($fp) 
-"""
 
 
 # for printing booleans, we want to print true/false rather than 1/0
@@ -112,4 +108,9 @@ var_dec = """\
 addiu  $sp $sp -4
 {val_init}
 sw     $t0 {offset}($fp)
+"""
+
+assigment = """\
+{expr}
+sw     $t0 {offset}($fp) 
 """

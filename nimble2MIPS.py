@@ -164,14 +164,14 @@ class MIPSGenerator(NimbleListener):
     def exitAssignment(self, ctx: NimbleParser.AssignmentContext):
         # Needs to store the expression in the slot reserved for the variable
         # The slot reserved for the variable is found in the scope
-        var_name = ctx.ID.getText()
+        var_name = ctx.ID().getText()
         var_sym = self.current_scope.resolve(var_name)
-        var_inx = var_sym.index
+        var_ind = var_sym.index
+        slot_offset = -4 * (var_ind + 1)
         self.mips[ctx] = templates.assigment.format(
             expr=self.mips[ctx.expr()],
-            offset=var_inx
+            offset=slot_offset
         )
-        pass
 
     def exitWhile(self, ctx: NimbleParser.WhileContext):
         self.mips[ctx] = templates.while_.format(
