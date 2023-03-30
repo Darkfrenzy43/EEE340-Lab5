@@ -114,3 +114,31 @@ assigment = """\
 {expr}
 sw     $t0 {offset}($fp) 
 """
+
+string_cat = """\
+{expr0}
+move $s0 $t0
+{expr1}
+move $s2 $t0
+li $s1 0
+{iter_char1}:
+    lb $s4 0($s0)
+    beqz $s4 {next_1_call}
+    addiu $s1 1
+    addiu $s0 1
+    j {iter_char1_call}
+{next_1}:
+
+{iter_char2}:
+    lb $s4 0($s2)
+    beqz $s4 {fin_count_call}
+    addiu $s1 1
+    addiu $s2 1
+    j {iter_char2_call}
+{fin_count}:
+    addiu $s1 1
+
+move   $a0 $s1
+li     $v0 1
+syscall
+"""

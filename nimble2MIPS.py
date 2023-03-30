@@ -99,12 +99,30 @@ class MIPSGenerator(NimbleListener):
     def exitAddSub(self, ctx: NimbleParser.AddSubContext):
 
         # TODO: extend for String concatenation
-
-        self.mips[ctx] = templates.add_sub_mul_div_compare.format(
-            operation='add' if ctx.op.text == '+' else 'sub',
-            expr0=self.mips[ctx.expr(0)],
-            expr1=self.mips[ctx.expr(1)]
-        )
+        if self.types[ctx.expr(0)] == PrimitiveType.String:
+            iter_char1 = self.unique_label('iter_char1')
+            iter_char2 = self.unique_label('iter_char2')
+            next_1 = self.unique_label('next_1')
+            next_2 = self.unique_label('next_2')
+            fin_count = self.unique_label('fin_count')
+            self.mips[ctx] = templates.string_cat.format(
+                expr0=self.mips[ctx.expr(0)],
+                expr1=self.mips[ctx.expr(1)],
+                iter_char1=iter_char1,
+                iter_char1_call=iter_char1,
+                iter_char2=iter_char2,
+                iter_char2_call=iter_char2,
+                next_1=next_1,
+                next_1_call=next_1,
+                fin_count=fin_count,
+                fin_count_call=fin_count,
+            )
+        else:
+            self.mips[ctx] = templates.add_sub_mul_div_compare.format(
+                operation='add' if ctx.op.text == '+' else 'sub',
+                expr0=self.mips[ctx.expr(0)],
+                expr1=self.mips[ctx.expr(1)]
+            )
 
     def exitIf(self, ctx: NimbleParser.IfContext):
 
