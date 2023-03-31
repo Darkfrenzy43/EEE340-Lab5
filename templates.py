@@ -118,8 +118,10 @@ sw     $t0 {offset}($fp)
 string_cat = """\
 {expr0}
 move $s0 $t0
+move $s5 $t0
 {expr1}
 move $s2 $t0
+move $s6 $t0
 li $s1 0
 {iter_char1}:
     lb $s4 0($s0)
@@ -138,7 +140,32 @@ li $s1 0
 {fin_count}:
     addiu $s1 1
 
-move   $a0 $s1
-li     $v0 1
+li $v0 9
+move $a0 $s1
 syscall
+
+move $s0 $v0
+{cp_chars_1}:
+    lb $s4 0($s5)
+    beqz $s4 {next_2_call}
+    lb $s4 0($s5)
+    sb $s4 0($s0)
+    addiu $s0 1
+    addiu $s5 1
+    j {cp_chars_1_call}
+{next_2}:
+
+{cp_chars_2}:
+    lb $s4 0($s6)
+    beqz $s4 {fin_cp_call}
+    lb $s4 0($s6)
+    sb $s4 0($s0)
+    addiu $s0 1
+    addiu $s6 1
+    j {cp_chars_2_call}
+{fin_cp_call}:
+
+lb $s1 0
+sb $s1 0($s0)
+move $t0 $v0
 """
