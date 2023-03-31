@@ -1,1 +1,1 @@
-var x : String = "69" + "420"
+var x : String = "69myballs" + "420mycockfuckingbrokeagain" + "+fuckyou+L+ratio"
