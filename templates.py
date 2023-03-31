@@ -176,11 +176,5 @@ move $s1 $v0 # <-- Keep another pointer to front of string for printing later
     li $s4 0
     sb $s4 0($s0)
     
-    # Print the concatenated string for now
-
-    li $v0 4
-    move $a0 $s1
-    syscall
-    
-    
+    move $t0 $v0
 """
