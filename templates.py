@@ -144,6 +144,7 @@ li $s1 0
     j {iter_char2_call}
 {fin_count}:
     addiu $s1 1
+    
 
 # Allocate memory, store return address in $s0 and $s1
 li $v0 9
@@ -176,8 +177,10 @@ move $s1 $v0 # <-- Keep another pointer to front of string for printing later
     sb $s4 0($s0)
     
     # Print the concatenated string for now
+
     li $v0 4
     move $a0 $s1
     syscall
+    
     
 """
