@@ -100,33 +100,17 @@ class MIPSGenerator(NimbleListener):
 
         # TODO: extend for String concatenation
         if self.types[ctx.expr(0)] == PrimitiveType.String:
-            iter_char1 = self.unique_label('iter_char1')
-            iter_char2 = self.unique_label('iter_char2')
-            next_1 = self.unique_label('next_1')
-            fin_count = self.unique_label('fin_count')
-            cp_chars_1 = self.unique_label('cp_chars_1')
-            next_2 = self.unique_label('next_2')
-            cp_chars_2 = self.unique_label('cp_chars_2')
-            fin_cp = self.unique_label('fin_cp')
             self.mips[ctx] = templates.string_cat.format(
                 expr0=self.mips[ctx.expr(0)],
                 expr1=self.mips[ctx.expr(1)],
-                iter_char1=iter_char1,
-                iter_char1_call=iter_char1,
-                iter_char2=iter_char2,
-                iter_char2_call=iter_char2,
-                next_1=next_1,
-                next_1_call=next_1,
-                fin_count=fin_count,
-                fin_count_call=fin_count,
-                cp_chars_1=cp_chars_1,
-                cp_chars_1_call=cp_chars_1,
-                next_2=next_2,
-                next_2_call=next_2,
-                cp_chars_2=cp_chars_2,
-                cp_chars_2_call=cp_chars_2,
-                fin_cp=fin_cp,
-                fin_cp_call=fin_cp,
+                iter_char1=self.unique_label('iter_char1'),
+                iter_char2=self.unique_label('iter_char2'),
+                next_1=self.unique_label('next_1'),
+                fin_count=self.unique_label('fin_count'),
+                cp_chars_1=self.unique_label('cp_chars_1'),
+                next_2=self.unique_label('next_2'),
+                cp_chars_2=self.unique_label('cp_chars_2'),
+                fin_cp=self.unique_label('fin_cp')
             )
         else:
             self.mips[ctx] = templates.add_sub_mul_div_compare.format(

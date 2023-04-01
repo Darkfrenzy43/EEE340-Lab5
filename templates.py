@@ -129,19 +129,19 @@ move $s6 $t0
 li $s1 0
 {iter_char1}:
     lb $s4 0($s0)
-    beqz $s4 {next_1_call}
+    beqz $s4 {next_1}
     
     addiu $s1 1
     addiu $s0 1
-    j {iter_char1_call}
+    j {iter_char1}
 {next_1}:
 
 {iter_char2}:
     lb $s4 0($s2)
-    beqz $s4 {fin_count_call}
+    beqz $s4 {fin_count}
     addiu $s1 1
     addiu $s2 1
-    j {iter_char2_call}
+    j {iter_char2}
 {fin_count}:
     addiu $s1 1
     
@@ -156,21 +156,21 @@ move $s1 $v0 # <-- Keep another pointer to front of string for printing later
 # Copy the chars
 {cp_chars_1}:
     lb $s4 0($s5)
-    beqz $s4 {next_2_call}
+    beqz $s4 {next_2}
     sb $s4 0($s0)
     addiu $s0 1
     addiu $s5 1
-    j {cp_chars_1_call}
+    j {cp_chars_1}
 {next_2}:
 
 {cp_chars_2}:
     lb $s4 0($s6)
-    beqz $s4 {fin_cp_call}
+    beqz $s4 {fin_cp}
     sb $s4 0($s0)
     addiu $s0 1
     addiu $s6 1
-    j {cp_chars_2_call}
-{fin_cp_call}:
+    j {cp_chars_2}
+{fin_cp}:
 
     # Adding null term at end
     li $s4 0

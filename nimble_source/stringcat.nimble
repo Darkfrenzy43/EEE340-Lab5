@@ -19,3 +19,5 @@ while i<5{
 h = "Hello" + "World!" + "\n"
 print h
 print "newline test"
+
+print "\n" + x + "str4"
