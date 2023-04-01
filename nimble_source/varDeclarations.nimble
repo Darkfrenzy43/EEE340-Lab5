@@ -1,4 +1,9 @@
-
+// ----------------------
+// expected output
+// String y is Some string
+// String x is 42
+// string z is false
+// ----------------------
 var y : String = "Some string"
 var x : Int = 12 + 30
 var z : Bool = !(!true)
