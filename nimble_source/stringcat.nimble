@@ -1,3 +1,16 @@
+// ----------------------
+// expected output
+// str1str2str3
+// str1str2str3newString
+// hi hi
+// hi hi hi
+// hi hi hi hi
+// hi hi hi hi hi
+// hi hi hi hi hi hi
+// HelloWorld!
+// newline test
+// str1str2str3str4
+// ----------------------
 var x : String = "str1" + "str2" + "str3"
 var y : String = x + "newString"
 var z : String = "hi"
