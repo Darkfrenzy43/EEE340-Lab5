@@ -1,5 +1,21 @@
 // All together now! Time to test everything out in this nimble file
 
+// --------------------- Expected output ---------------------
+// Boolean value is: false
+// theNumber is positive. Put a negative on it.
+// Boolean value is: true
+// theNumber is negative. You may proceed.
+//
+// 20 + 5 = 25
+// (2 + 12) / 7 = 2
+// ((9 * 9) / 9) - 9 = 0
+//
+//
+// Here's a secret message... don't worry. It's appropriate:
+// [insert secret URL here. Can't show it here because it's a secret]
+// -----------------------------------------------------------
+
+
 
 // Defining the variables
 var theLink : String = ""
