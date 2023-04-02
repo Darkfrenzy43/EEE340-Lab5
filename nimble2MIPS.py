@@ -129,7 +129,7 @@ class MIPSGenerator(NimbleListener):
             true_block=self.mips[ctx.block(0)],
             endif_label=self.unique_label('endif'),
             false_block=self.mips[ctx.block(1)] if ctx.block(1) is not None else "",
-            endelse_label=self.unique_label('endelse') # Adding this is fine even when no else statement.
+            endelse_label=self.unique_label('endelse')  # Adding this is fine even when no else statement.
         )
 
     # ---------------------------------------------------------------------------------
@@ -145,13 +145,8 @@ class MIPSGenerator(NimbleListener):
         slot_offset = -4 * (self.current_scope.resolve(ctx.ID().getText()).index + 1)
 
         # Handle if there was assignment
-        if ctx.expr() is not None:
-            val_init_code = self.mips[ctx.expr()]
-        elif PrimitiveType[ctx.TYPE().getText()] != PrimitiveType.ERROR:
-            val_init_code = "li     $t0 0"
-        else:
-            # If no expr added, initialize vars to their default value depending on type
-            val_init_code = ""
+        val_init_code = self.mips[ctx.expr()] if ctx.expr() is not None else (
+            "li $t0 0" if PrimitiveType[ctx.TYPE().getText()] != PrimitiveType.ERROR else "")
 
         # Set the mips translation.
         self.mips[ctx] = templates.var_dec.format(
