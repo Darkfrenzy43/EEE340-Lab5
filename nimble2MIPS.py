@@ -147,13 +147,6 @@ class MIPSGenerator(NimbleListener):
         # Handle if there was assignment
         val_init_code = self.mips[ctx.expr()] if ctx.expr() is not None else (
             "li $t0 0" if PrimitiveType[ctx.TYPE().getText()] != PrimitiveType.ERROR else "")
-        # Handle if there was assignment.
-        # If no expr added, initialize vars to their default value depending on type
-        val_init_code = ""
-        if ctx.expr() is not None:
-            val_init_code = self.mips[ctx.expr()]
-        elif PrimitiveType[ctx.TYPE().getText()] != PrimitiveType.ERROR:
-            val_init_code = "li     $t0 0"
 
         # Set the mips translation.
         self.mips[ctx] = templates.var_dec.format(
