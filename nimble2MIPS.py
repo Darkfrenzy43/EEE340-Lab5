@@ -160,18 +160,17 @@ class MIPSGenerator(NimbleListener):
         )
 
     def exitAssignment(self, ctx: NimbleParser.AssignmentContext):
+
         # Needs to store the expression in the slot reserved for the variable
         # The slot reserved for the variable is found in the scope
-        var_name = ctx.ID().getText()
-        var_sym = self.current_scope.resolve(var_name)
-        var_ind = var_sym.index
-        slot_offset = -4 * (var_ind + 1)
+        slot_offset = -4 * (self.current_scope.resolve(ctx.ID().getText()).index + 1)
         self.mips[ctx] = templates.assigment.format(
             expr=self.mips[ctx.expr()],
             offset=slot_offset
         )
 
     def exitWhile(self, ctx: NimbleParser.WhileContext):
+
         self.mips[ctx] = templates.while_.format(
             condition=self.mips[ctx.expr()],
             true_block=self.mips[ctx.block()],
@@ -183,16 +182,17 @@ class MIPSGenerator(NimbleListener):
 
         # Unary minus code
         if ctx.op.text == '-':
-            self.mips[ctx] = templates.unary_minus.format(expr = self.mips[ctx.expr()]);
-
+            self.mips[ctx] = templates.unary_minus.format(expr=self.mips[ctx.expr()])
         # Boolean negation code
         elif ctx.op.text == '!':
-            self.mips[ctx] = templates.bool_neg.format(expr = self.mips[ctx.expr()]);
+            self.mips[ctx] = templates.bool_neg.format(expr=self.mips[ctx.expr()])
 
     def exitParens(self, ctx: NimbleParser.ParensContext):
+
         self.mips[ctx] = self.mips[ctx.expr()]
 
     def exitCompare(self, ctx: NimbleParser.CompareContext):
+
         self.mips[ctx] = templates.add_sub_mul_div_compare.format(
             operation='seq' if ctx.op.text == '==' else ('sle' if ctx.op.text == '<=' else 'slt'),
             expr0=self.mips[ctx.expr(0)],
@@ -202,20 +202,13 @@ class MIPSGenerator(NimbleListener):
     def exitVariable(self, ctx: NimbleParser.VariableContext):
 
         # Extract info on variable
-        var_name = ctx.ID().getText()
-        var_sym = self.current_scope.resolve(var_name);
-        var_ind = var_sym.index;
-        var_offset = -4 * (var_ind + 1);
-
-        self.mips[ctx] = "lw   $t0  {}($fp)".format(var_offset);
-
+        var_offset = -4 * (self.current_scope.resolve(ctx.ID().getText()).index + 1)
+        self.mips[ctx] = "lw   $t0  {}($fp)".format(var_offset)
 
     def exitMulDiv(self, ctx: NimbleParser.MulDivContext):
 
         self.mips[ctx] = templates.add_sub_mul_div_compare.format(
-            operation = 'mul' if ctx.op.text == '*' else 'div',
-            expr0 = self.mips[ctx.expr(0)],
-            expr1 = self.mips[ctx.expr(1)]
+            operation='mul' if ctx.op.text == '*' else 'div',
+            expr0=self.mips[ctx.expr(0)],
+            expr1=self.mips[ctx.expr(1)]
         )
-
-
