@@ -117,11 +117,18 @@ string_cat = """\
 
 # Load registers with string addresses
 {expr0}
-move $s0 $t0
-move $s5 $t0
+sw $t0 0($sp)
+addiu $sp $sp -4
 {expr1}
+
+# load expr1 into registers
 move $s2 $t0
 move $s6 $t0
+
+# load expr0 into registers
+lw $s0 4($sp)
+lw $s5 4($sp)
+addiu $sp $sp 4
 
 # Count string chars
 li $s1 0

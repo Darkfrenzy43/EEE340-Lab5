@@ -10,6 +10,7 @@
 // HelloWorld!
 // newline test
 // str1str2str3str4
+// str1 str2 str3 str4
 // ----------------------
 var x : String = "str1" + "str2" + "str3"
 var y : String = x + "newString"
@@ -34,3 +35,6 @@ print h
 print "newline test"
 
 print "\n" + x + "str4"
+
+print "\n"
+print ("str1 " + "str2 ") + ("str3 " + "str4 ")
