@@ -1,9 +1,9 @@
 """
 Templates used by the nimble2MIPS.py module
 
-Authors: TODO: your names here
+Authors: OCdt Brown & OCdt Velasco
 
-Date: TODO: submission date here
+Date: 01-04-2023
 """
 
 script = """\
@@ -72,8 +72,6 @@ move   $a0 $t0
 li     $v0 {service_code}
 syscall
 """
-
-
 
 # for printing booleans, we want to print true/false rather than 1/0
 # so we start by loading the corresponding string address in to $a0
