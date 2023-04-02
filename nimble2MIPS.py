@@ -145,6 +145,7 @@ class MIPSGenerator(NimbleListener):
         slot_offset = -4 * (self.current_scope.resolve(ctx.ID().getText()).index + 1)
 
         # Handle if there was assignment
+
         val_init_code = self.mips[ctx.expr()] if ctx.expr() is not None else (
             "li $t0 0" if PrimitiveType[ctx.TYPE().getText()] != PrimitiveType.ERROR else "")
 
