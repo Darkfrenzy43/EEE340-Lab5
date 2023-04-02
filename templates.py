@@ -39,10 +39,10 @@ syscall
 
 add_sub_mul_div_compare = """\
 {expr0}
-sw     $t0 0($sp) 
 addiu  $sp $sp -4 
+sw     $t0 0($sp) 
 {expr1}
-lw     $s1 4($sp) 
+lw     $s1 0($sp) 
 {operation}    $t0 $s1 $t0 
 addiu  $sp $sp 4
 """

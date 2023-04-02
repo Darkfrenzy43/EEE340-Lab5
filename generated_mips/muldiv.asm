@@ -37,10 +37,10 @@ li     $v0 4
 syscall
 
 li     $t0 30
-sw     $t0 0($sp) 
 addiu  $sp $sp -4 
+sw     $t0 0($sp) 
 li     $t0 70
-lw     $s1 4($sp) 
+lw     $s1 0($sp) 
 mul    $t0 $s1 $t0 
 addiu  $sp $sp 4
 
@@ -64,10 +64,10 @@ li     $v0 4
 syscall
 
 li     $t0 99
-sw     $t0 0($sp) 
 addiu  $sp $sp -4 
+sw     $t0 0($sp) 
 li     $t0 33
-lw     $s1 4($sp) 
+lw     $s1 0($sp) 
 div    $t0 $s1 $t0 
 addiu  $sp $sp 4
 
