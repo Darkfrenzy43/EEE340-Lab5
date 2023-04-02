@@ -2,7 +2,7 @@
 // expected output
 // String y is Some string
 // String x is 42
-// string z is false
+// string z is true
 // ----------------------
 var y : String = "Some string"
 var x : Int = 12 + 30

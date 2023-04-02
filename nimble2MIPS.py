@@ -144,14 +144,13 @@ class MIPSGenerator(NimbleListener):
         # Reserve a slot in stack for declared local var
         slot_offset = -4 * (self.current_scope.resolve(ctx.ID().getText()).index + 1)
 
-        # Handle if there was assignment
+        # Handle if there was assignment.
+        # If no expr added, initialize vars to their default value depending on type
+        val_init_code = ""
         if ctx.expr() is not None:
             val_init_code = self.mips[ctx.expr()]
         elif PrimitiveType[ctx.TYPE().getText()] != PrimitiveType.ERROR:
             val_init_code = "li     $t0 0"
-        else:
-            # If no expr added, initialize vars to their default value depending on type
-            val_init_code = ""
 
         # Set the mips translation.
         self.mips[ctx] = templates.var_dec.format(
