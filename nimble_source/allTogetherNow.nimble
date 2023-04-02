@@ -3,33 +3,68 @@
 
 // Defining the variables
 var theLink : String = ""
-var theNumber : Int = 2
+var theNumber : Int = 5
 var theBoolean : Bool
 
 
-var myInt : Int = 10
-
-theBoolean = true
-
 // --- Main entry point ---
 
-// Here's an unnecessarily complex while loop... nope
+// Here's an unnecessarily complex while loop...
 
-
-
-
+theBoolean = false
 while !(theNumber < 0) {
-    print "\ntheNumber currently is: "
-    print theNumber
-    theNumber = -theNumber
+
+    print "\nBoolean value is: "
+    print theBoolean
+
+    if theBoolean {
+        theNumber = -(theNumber)
+    }
+
+    if theNumber < 0 {
+        print "\ntheNumber is negative. You may proceed."
+    }
+    else {
+        print "\ntheNumber is positive. Put a negative on it."
+        theBoolean = true
+    }
 }
-print "\ntheNumber after loop is: "
-print theNumber
+
+// A bit of arithmetic...
+print "\n\n20 + 5 = "
+print (20 + 5)
+print "\n(2 + 12) / 7 = "
+print (2 + 12) / 7
+print "\n((9 * 9) / 9) - 9 = "
+print ((9 * 9) / 9) - 9
+print "\n\n"
+
+// And a bit of (unnecessarily complex) string concatenation
+while theNumber < 0 {
+
+    if theNumber == -5 {
+        theLink = theLink + "https://ww"
+    }
+    if theNumber == -4 {
+        theLink = theLink + "w.yout"
+    }
+    if theNumber == -3 {
+        theLink = theLink + "ube.co"
+    }
+    if theNumber == -2 {
+        theLink = theLink + "m/watch?v="
+    }
+    if theNumber == -1 {
+        theLink = theLink + "E4WlUXrJgy4"
+    }
+
+    // Increment theNumber
+    theNumber = theNumber + 1
+}
+
+print "\n\nHere's a secret message... don't worry. It's appropriate: \n"
+print theLink
 
 
-if true {
-    print "\n\nmyInt is: "
-    print myInt
-}
 
 
