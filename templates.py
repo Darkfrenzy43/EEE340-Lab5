@@ -151,7 +151,6 @@ li $v0 9
 move $a0 $s1
 syscall
 move $s0 $v0
-move $s1 $v0 # <-- Keep another pointer to front of string for printing later
 
 # Copy the chars
 {cp_chars_1}:
@@ -176,5 +175,6 @@ move $s1 $v0 # <-- Keep another pointer to front of string for printing later
     li $s4 0
     sb $s4 0($s0)
     
+    # store result of expression in t0
     move $t0 $v0
 """
