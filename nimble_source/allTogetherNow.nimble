@@ -62,7 +62,7 @@ while theNumber < 0 {
     theNumber = theNumber + 1
 }
 
-print "\n\nHere's a secret message... don't worry. It's appropriate: \n"
+print "\n\nHere's a very important video... don't worry. It's appropriate: \n"
 print theLink
 
 
