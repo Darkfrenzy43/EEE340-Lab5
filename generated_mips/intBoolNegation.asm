@@ -52,12 +52,12 @@ li     $v0 4
 syscall
 
 li     $t0 10
-sw     $t0 0($sp) 
 addiu  $sp $sp -4 
+sw     $t0 0($sp) 
 li     $t0 3
 neg    $t0, $t0 
 
-lw     $s1 4($sp) 
+lw     $s1 0($sp) 
 add    $t0 $s1 $t0 
 addiu  $sp $sp 4
 
